@@ -111,3 +111,100 @@ em, i { font-style: italic }
 @media (max-width: 560px){
   .project .submeta{ font-size: 13px; }
 }
+
+/* ===== Global frame + centering for all pages ===== */
+:root{
+  /* side frame padding; tweak if you want a bigger/smaller gutter */
+  --frame: clamp(16px, 3.5vw, 40px);
+}
+
+/* add a subtle frame around page content */
+main, #app { padding-left: var(--frame); padding-right: var(--frame); }
+
+/* center the project article itself */
+.project { max-width: 1100px; margin-left: auto; margin-right: auto; }
+
+/* center the page title; keep body text left-aligned */
+.project h2 { text-align: center; }
+
+/* center the little meta lines under the title */
+.project .meta,
+.project .submeta { 
+  max-width: 900px;
+  margin-left: auto; 
+  margin-right: auto; 
+  text-align: center;
+}
+
+/* hide the back button everywhere */
+.project .back { display: none !important; }
+
+/* give the top nav the same side frame so it aligns with main */
+.top-nav { padding-left: var(--frame); padding-right: var(--frame); }
+
+/* the carousel you already have is centered; this just ensures it aligns with the frame on small screens too */
+@media (max-width: 900px){
+  .carousel { margin-left: auto; margin-right: auto; }
+}
+
+
+/* ===== Global carousel (shared by all project pages) ===== */
+.carousel{
+  /* consistent height; tweak to taste */
+  --h: clamp(260px, 50vw, 520px);
+  position: relative;
+  max-width: 960px;
+  margin: 12px auto 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+.carousel .viewport{ height: var(--h); position: relative; }
+.carousel .track{
+  display: flex; width: 100%; height: 100%;
+  transition: transform 320ms ease; will-change: transform;
+}
+.carousel .slide{
+  min-width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center; /* center every image */
+  user-select: none;
+}
+/* show the whole image (verticals shrink to fit; horizontals scale too) */
+.carousel .slide img{
+  max-height: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  width: auto !important;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.carousel .nav{ position: absolute; inset: 0; pointer-events: none; }
+.carousel .btn{
+  pointer-events: auto;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  border: 1px solid var(--line);
+  background: #ffffffcc; backdrop-filter: blur(2px);
+  border-radius: 999px; width: 36px; height: 36px;
+  display: grid; place-items: center;
+  font-family: "IBM Plex Mono", monospace; font-size: 16px; line-height: 1;
+  cursor: pointer;
+}
+.carousel .btn:hover{ background:#fff; }
+.carousel .prev{ left:10px; }
+.carousel .next{ right:10px; }
+
+.carousel .dots{
+  position: absolute; left:50%; bottom:10px; transform: translateX(-50%);
+  display:flex; gap:6px; pointer-events: none;
+}
+.carousel .dot{ width:6px; height:6px; border-radius:50%; background:#bbb; opacity:.65; }
+.carousel .dot.is-active{ background:#111; opacity:.95; }
+
+/* anchors inside galleries behave as blocks (for clickable images) */
+.project .gallery a { display:block; }
+
+/* center the text block under carousels on all project pages */
+.project .body{ max-width:65ch; margin:0 auto 20px; text-align:left; }

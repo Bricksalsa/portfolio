@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,16 +7,49 @@
   <!-- Monospace family close to reference -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css" />
+
+  <!-- Lightbox styles (local to this page) -->
+  <style>
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.85);
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__img {
+      max-width: 94vw; max-height: 92vh;
+      object-fit: contain; background:#fff;
+      border:1px solid var(--line); border-radius:10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
+    }
+    .lightbox__btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      border: 1px solid #e5e5e5; background: #ffffffcc; backdrop-filter: blur(2px);
+      width: 40px; height: 40px; border-radius: 999px; cursor: pointer;
+      display: grid; place-items: center; font-family: var(--mono); font-size: 18px;
+    }
+    .lightbox__btn:hover { background:#fff; }
+    .lightbox__prev { left: 22px; }
+    .lightbox__next { right: 22px; }
+    .lightbox__close {
+      top: 18px; right: 18px; transform:none;
+      width: 34px; height: 34px; border-radius:999px;
+    }
+    @media (max-width: 560px){
+      .lightbox__btn{ width: 36px; height: 36px; }
+      .lightbox__prev{ left: 12px; } .lightbox__next{ right: 12px; }
+    }
+  </style>
 </head>
 <body>
 <header class="site-header">
-    <div class="hy-lines" id="hy-lines">
-      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
-      <div class="hy-line" data-left="" data-center="douwe teusink" data-right=""></div>
-      <div class="hy-line" data-left="" data-center="portfolio" data-right="" data-accent="true"></div>
-      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
-    </div>
-  </header>
+  <div class="hy-lines" id="hy-lines">
+    <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+    <div class="hy-line" data-left="" data-center="douwe teusink" data-right=""></div>
+    <div class="hy-line" data-left="" data-center="portfolio" data-right="" data-accent="true"></div>
+    <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+  </div>
+</header>
 
 <nav class="top-nav">
   <a href="../index.html" class="nav-link">work</a>
@@ -27,23 +59,136 @@
 
 <main>
   <article class="project">
-    <a class="back" href="../index.html">← back</a>
+    <!-- back button hidden globally via CSS -->
     <h2>poeM</h2>
     <div class="meta">2023</div>
+
+    <!-- optional specs line -->
+    <div class="submeta">
+      <span class="label">materials</span> IP camera, AI model, metal signage, printed poem output
+      <span class="dot"></span>
+      <span class="label">dimensions</span> Variable
+    </div>
+
+    <!-- Carousel (top) — styles come from styles.css -->
+    <div class="carousel" role="region" aria-label="Project images">
+      <div class="viewport">
+        <div class="track" id="pm-track">
+          <div class="slide"><img src="../images/poem.jpg" alt="poeM — image 1"></div>
+          <div class="slide"><img src="../images/poem_1.jpg" alt="poeM — image 2"></div>
+          <div class="slide"><img src="../images/poem_2.jpg" alt="poeM — image 3"></div>
+          <div class="slide"><img src="../images/poem_3.jpg" alt="poeM — image 3"></div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button class="btn prev" id="pm-prev" aria-label="Previous image">‹</button>
+        <button class="btn next" id="pm-next" aria-label="Next image">›</button>
+      </div>
+
+      <div class="dots" id="pm-dots" aria-hidden="true"></div>
+    </div>
+
+    <!-- Text (centered container; text left) -->
     <div class="body">
-  <!-- START: Project text (prefilled) -->
-  <p>poeM is a machine that writes poems based on what it sees. Using a security camera and artificial intelligence, the work generates short poems that vary in style, tone,  and subject—completely on its own terms. The AI decides not only what to write, but when to write it, turning passive observation into active expression. Presented as a  functional surveillance device, poeM creates unease by blending familiar systems of control with the unexpected presence of creativity.     Developed as my final bachelor project, poeM explores authorship, agency, and the role of AI in shaping cultural production. It engages with societal questions about  automation and creativity, while also experimenting with scenography and spatial storytelling to draw in the viewer. The physical prototype, accompanying signage, and  printed poems were all designed to evoke the unsettling duality of a machine that watches and writes.     This project marked a turning point in my practice—shifting from making visually pleasing installations to telling layered stories through technology. It helped define my  identity as a designer and artist working with systems, perception, and the unexpected.Poe-m 1. Date: 2023   Dimensions: Variable   Materials: IP camera, AI model, metal  signage, printed poem output Thanks for Watching is an installation that stages and subverts the act of spectatorship. Visitors enter a dark, curtained space where they’re  invited to pay — by coin or card — to briefly look through a small window. Behind the window appears a mirrored red room, lit theatrically, containing a surveillance camera and a screen. As the camera slowly turns to face the viewer, the screen reveals their own image,  placing them unexpectedly at the center of the spectacle.     What feels like a moment of private looking is quietly captured by the system: a photo is taken and used to generate a poetic AI-written  description of the participant. This text is then shown outside the installation on a public LED ticker, turning each visitor into the subject of  the next viewer’s curiosity.     By weaving together payment systems, theatrical framing, surveillance tools, and generative AI, the work explores how looking is mediated, commodified, and redirected. Thanks for Watching turns the desire to see into a loop of exposure — where the viewer becomes content, the system becomes the storyteller, and no one remains outside the frame.2.Thanks for  Watching Date: 2025   Materials: Coin mechanism, custom housing, theater lighting, curtains,  AI-generated text, camera, Ticker Display NOMINATED FOR HKU AWARD This</p>
-  <!-- END: Project text -->
-</div>
-    <div class="gallery">
-  <!-- START: Gallery images (replace filenames) -->
-  <img src="../images/poem_01.jpg" alt="poeM — image 1">
-  <img src="../images/poem_02.jpg" alt="poeM — image 2">
-  <img src="../images/poem_03.jpg" alt="poeM — image 3">
-  <!-- END: Gallery images -->
-</div>
+      <!-- START: Project text (exactly as you sent) -->
+      <p>poeM is a machine that writes poems based on what it sees. Using a security camera and artificial intelligence, the work generates short poems that vary in style, tone, and subject—completely on its own terms. The AI decides not only what to write, but when to write it, turning passive observation into active expression. Presented as a functional surveillance device, poeM creates unease by blending familiar systems of control with the unexpected presence of creativity. Developed as my final bachelor project, poeM explores authorship, agency, and the role of AI in shaping cultural production. It engages with societal questions about automation and creativity, while also experimenting with scenography and spatial storytelling to draw in the viewer. The physical prototype, accompanying signage, and printed poems were all designed to evoke the unsettling duality of a machine that watches and writes. This project marked a turning point in my practice—shifting from making visually pleasing installations to telling layered stories through technology. It helped define my identity as a designer and artist working with systems, perception, and the unexpected.</p>
+      <!-- END: Project text -->
+    </div>
   </article>
 </main>
+
 <footer class="site-footer"><p class="copy">&copy; <span id="year">2025</span> douwe teusink</p></footer>
+
+<!-- Lightbox markup -->
+<div class="lightbox" id="lb" aria-modal="true" role="dialog">
+  <img class="lightbox__img" id="lb-img" alt="">
+  <button class="lightbox__btn lightbox__prev" id="lb-prev" aria-label="Previous image">‹</button>
+  <button class="lightbox__btn lightbox__next" id="lb-next" aria-label="Next image">›</button>
+  <button class="lightbox__btn lightbox__close" id="lb-close" aria-label="Close">×</button>
+</div>
+
+<!-- Carousel + Lightbox script (no dependencies) -->
+<script>
+(function(){
+  const track   = document.getElementById('pm-track');
+  const prevBtn = document.getElementById('pm-prev');
+  const nextBtn = document.getElementById('pm-next');
+  const slides  = Array.from(track.children);
+  const dotsBox = document.getElementById('pm-dots');
+  let index = 0;
+
+  // build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'dot' + (i === 0 ? ' is-active' : '');
+    d.addEventListener('click', () => { index = i; update(); });
+    dotsBox.appendChild(d);
+  });
+
+  function update(){
+    track.style.transform = `translateX(-${index * 100}%)`;
+    [...dotsBox.children].forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+    });
+  }
+
+  prevBtn.addEventListener('click', () => { index = (index - 1 + slides.length) % slides.length; update(); });
+  nextBtn.addEventListener('click', () => { index = (index + 1) % slides.length; update(); });
+
+  // keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  prevBtn.click();
+    if (e.key === 'ArrowRight') nextBtn.click();
+  });
+
+  // swipe
+  let startX = null;
+  track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+  track.addEventListener('touchend',   (e) => {
+    if (startX == null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) (dx < 0 ? nextBtn : prevBtn).click();
+    startX = null;
+  });
+
+  // ---------- Lightbox ----------
+  const lb      = document.getElementById('lb');
+  const lbImg   = document.getElementById('lb-img');
+  const lbPrev  = document.getElementById('lb-prev');
+  const lbNext  = document.getElementById('lb-next');
+  const lbClose = document.getElementById('lb-close');
+  let li = 0; // lightbox index
+
+  function openLB(i){
+    li = i;
+    lbImg.src = slides[li].querySelector('img').src;
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB(){
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+  function navLB(dir){
+    li = (li + dir + slides.length) % slides.length;
+    lbImg.src = slides[li].querySelector('img').src;
+  }
+
+  slides.forEach((slide, i) => {
+    slide.querySelector('img').addEventListener('click', () => openLB(i));
+  });
+
+  lbPrev.addEventListener('click', () => navLB(-1));
+  lbNext.addEventListener('click', () => navLB(1));
+  lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB(); });
+
+  update();
+})();
+</script>
+
 <script src="../lines.js"></script>
-</body></html>
+</body>
+</html>

@@ -4,9 +4,41 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>douwe teusink — portfolio</title>
-  <!-- Monospace family close to reference -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css" />
+
+  <!-- Lightbox styles (local to this page) -->
+  <style>
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.85);
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__img {
+      max-width: 94vw; max-height: 92vh;
+      object-fit: contain; background:#fff;
+      border:1px solid var(--line); border-radius:10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
+    }
+    .lightbox__btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      border: 1px solid #e5e5e5; background: #ffffffcc; backdrop-filter: blur(2px);
+      width: 40px; height: 40px; border-radius: 999px; cursor: pointer;
+      display: grid; place-items: center; font-family: var(--mono); font-size: 18px;
+    }
+    .lightbox__btn:hover { background:#fff; }
+    .lightbox__prev { left: 22px; }
+    .lightbox__next { right: 22px; }
+    .lightbox__close {
+      top: 18px; right: 18px; transform:none;
+      width: 34px; height: 34px; border-radius:999px;
+    }
+    @media (max-width: 560px){
+      .lightbox__btn{ width: 36px; height: 36px; }
+      .lightbox__prev{ left: 12px; } .lightbox__next{ right: 12px; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -26,37 +58,39 @@
 
   <main>
     <article class="project">
-      <a class="back" href="../index.html">← back</a>
       <h2>Thanks for Watching</h2>
       <div class="meta">2025</div>
 
-      <!-- NEW: one-line specs (edit freely per project; remove parts you don't need) -->
       <div class="submeta">
-        <!-- example values — change or delete any chunk -->
-        <span class="label">materials</span> Coin mechanism, custom housing, theater lighting, curtains, AI-generated text, camera, Ticker Display
+        <span class="label">materials</span> Coin mechanism, custom housing, theater lighting, curtains, AI-generated text, camera, ticker display
         <span class="dot"></span>
-        
         <span class="label">nominations</span> HKU Award
       </div>
 
-      <!-- text + images wrapper for clean layout -->
-      <div class="content two-col">
-        <div class="body">
-          <!-- START: Project text -->
-          <p><em>Thanks for Watching</em> is an installation that stages and subverts the act of spectatorship. Visitors enter a dark, curtained space where they’re invited to pay—by coin or card—to briefly look through a small window. Behind the window appears a mirrored red room, lit theatrically, containing a surveillance camera and a screen. As the camera slowly turns to face the viewer, the screen reveals their own image, placing them unexpectedly at the center of the spectacle.</p>
-          <p>What feels like a moment of private looking is quietly captured by the system: a photo is taken and used to generate a poetic AI-written description of the participant. This text is then shown outside the installation on a public LED ticker, turning each visitor into the subject of the next viewer’s curiosity.</p>
-          <p>By weaving together payment systems, theatrical framing, surveillance tools, and generative AI, the work explores how looking is mediated, commodified, and redirected. <em>Thanks for Watching</em> turns the desire to see into a loop of exposure—where the viewer becomes content, the system becomes the storyteller, and no one remains outside the frame.</p>
-          <!-- END: Project text -->
+      <!-- Carousel (top) — styling comes from styles.css -->
+      <div class="carousel" role="region" aria-label="Project images">
+        <div class="viewport">
+          <div class="track" id="tfw-track">
+            <div class="slide"><img src="../images/tfw.jpg"   alt="Thanks for Watching — image 1"></div>
+            <div class="slide"><img src="../images/tfw_1.jpg" alt="Thanks for Watching — image 2"></div>
+            <div class="slide"><img src="../images/tfw_2.jpg" alt="Thanks for Watching — image 3 (vertical)"></div>
+            <div class="slide"><img src="../images/tfw_3.jpg" alt="Thanks for Watching — image 4"></div>
+          </div>
         </div>
 
-        <div class="gallery">
-          <!-- START: Gallery images (replace filenames as needed) -->
-          <img src="../images/tfw.jpg"   alt="Thanks for Watching — image 1">
-          <img src="../images/tfw_1.jpg" alt="Thanks for Watching — image 2">
-          <img src="../images/tfw_2.jpg" alt="Thanks for Watching — image 3">
-          <img src="../images/tfw_3.jpg" alt="Thanks for Watching — image 4">
-          <!-- END: Gallery images -->
+        <div class="nav">
+          <button class="btn prev" id="tfw-prev" aria-label="Previous image">‹</button>
+          <button class="btn next" id="tfw-next" aria-label="Next image">›</button>
         </div>
+
+        <div class="dots" id="tfw-dots" aria-hidden="true"></div>
+      </div>
+
+      <!-- Explanatory text underneath (centered container; text left) -->
+      <div class="body">
+        <p><em>Thanks for Watching</em> is an installation that stages and subverts the act of spectatorship. Visitors enter a dark, curtained space where they’re invited to pay—by coin or card—to briefly look through a small window. Behind the window appears a mirrored red room, lit theatrically, containing a surveillance camera and a screen. As the camera slowly turns to face the viewer, the screen reveals their own image, placing them unexpectedly at the center of the spectacle.</p>
+        <p>What feels like a moment of private looking is quietly captured by the system: a photo is taken and used to generate a poetic AI-written description of the participant. This text is then shown outside the installation on a public LED ticker, turning each visitor into the subject of the next viewer’s curiosity.</p>
+        <p>By weaving together payment systems, theatrical framing, surveillance tools, and generative AI, the work explores how looking is mediated, commodified, and redirected. <em>Thanks for Watching</em> turns the desire to see into a loop of exposure—where the viewer becomes content, the system becomes the storyteller, and no one remains outside the frame.</p>
       </div>
     </article>
   </main>
@@ -64,6 +98,85 @@
   <footer class="site-footer">
     <p class="copy">&copy; <span id="year">2025</span> douwe teusink</p>
   </footer>
+
+  <!-- Lightbox markup -->
+  <div class="lightbox" id="lb" aria-modal="true" role="dialog">
+    <img class="lightbox__img" id="lb-img" alt="">
+    <button class="lightbox__btn lightbox__prev" id="lb-prev" aria-label="Previous image">‹</button>
+    <button class="lightbox__btn lightbox__next" id="lb-next" aria-label="Next image">›</button>
+    <button class="lightbox__btn lightbox__close" id="lb-close" aria-label="Close">×</button>
+  </div>
+
+  <!-- Carousel + Lightbox script (no deps) -->
+  <script>
+    (function(){
+      const track   = document.getElementById('tfw-track');
+      const prevBtn = document.getElementById('tfw-prev');
+      const nextBtn = document.getElementById('tfw-next');
+      const slides  = Array.from(track.children);
+      const dotsBox = document.getElementById('tfw-dots');
+      let index = 0;
+
+      // build dots
+      slides.forEach((_, i) => {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === 0 ? ' is-active' : '');
+        d.addEventListener('click', () => { index = i; update(); });
+        dotsBox.appendChild(d);
+      });
+
+      function update(){
+        track.style.transform = `translateX(-${index * 100}%)`;
+        [...dotsBox.children].forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === index);
+        });
+      }
+
+      prevBtn.addEventListener('click', () => { index = (index - 1 + slides.length) % slides.length; update(); });
+      nextBtn.addEventListener('click', () => { index = (index + 1) % slides.length; update(); });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  prevBtn.click();
+        if (e.key === 'ArrowRight') nextBtn.click();
+      });
+
+      // ---------- Lightbox ----------
+      const lb      = document.getElementById('lb');
+      const lbImg   = document.getElementById('lb-img');
+      const lbPrev  = document.getElementById('lb-prev');
+      const lbNext  = document.getElementById('lb-next');
+      const lbClose = document.getElementById('lb-close');
+      let li = 0; // lightbox index
+
+      function openLB(i){
+        li = i;
+        lbImg.src = slides[li].querySelector('img').src;
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLB(){
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+      function navLB(dir){
+        li = (li + dir + slides.length) % slides.length;
+        lbImg.src = slides[li].querySelector('img').src;
+      }
+
+      slides.forEach((slide, i) => {
+        slide.querySelector('img').addEventListener('click', () => openLB(i));
+      });
+
+      lbPrev.addEventListener('click', () => navLB(-1));
+      lbNext.addEventListener('click', () => navLB(1));
+      lbClose.addEventListener('click', closeLB);
+      lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB(); });
+
+      update();
+    })();
+  </script>
+
   <script src="../lines.js"></script>
 </body>
 </html>
