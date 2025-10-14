@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,41 +7,249 @@
   <!-- Monospace family close to reference -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css" />
+
+  <!-- Page-scoped extras: lightbox + make iframe fill carousel height -->
+  <style>
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.85);
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__img {
+      max-width: 94vw; max-height: 92vh;
+      object-fit: contain; background:#fff;
+      border:1px solid var(--line); border-radius:10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
+    }
+    .lightbox__btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      border: 1px solid #e5e5e5; background: #ffffffcc; backdrop-filter: blur(2px);
+      width: 40px; height: 40px; border-radius: 999px; cursor: pointer;
+      display: grid; place-items: center; font-family: var(--mono); font-size: 18px;
+    }
+    .lightbox__btn:hover { background:#fff; }
+    .lightbox__prev { left: 22px; }
+    .lightbox__next { right: 22px; }
+    .lightbox__close {
+      top: 18px; right: 18px; transform:none;
+      width: 34px; height: 34px; border-radius:999px;
+    }
+    @media (max-width: 560px){
+      .lightbox__btn{ width: 36px; height: 36px; }
+      .lightbox__prev{ left: 12px; } .lightbox__next{ right: 12px; }
+    }
+
+    /* Make the YouTube iframe fill the fixed-height carousel viewport */
+    .carousel .slide iframe{
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+    }
+  </style>
 </head>
 <body>
 <header class="site-header">
-    <div class="hy-lines" id="hy-lines">
-      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
-      <div class="hy-line" data-left="" data-center="douwe teusink" data-right=""></div>
-      <div class="hy-line" data-left="" data-center="portfolio" data-right="" data-accent="true"></div>
-      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
-    </div>
-  </header>
+  <div class="hy-lines" id="hy-lines">
+    <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+    <div class="hy-line" data-left="" data-center="douwe teusink" data-right=""></div>
+    <div class="hy-line" data-left="" data-center="portfolio" data-right="" data-accent="true"></div>
+    <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+  </div>
+</header>
 
 <nav class="top-nav">
   <a href="../index.html" class="nav-link">work</a>
   <a href="../about.html" class="nav-link">about</a>
-  <a href="mailto:douweteusink@gmail.com" class="nav-link">contact</a>
+  <a href="mailto:douweteusink@hotmail.com" class="nav-link">contact</a>
 </nav>
 
 <main>
   <article class="project">
-    <a class="back" href="../index.html">← back</a>
+    <!-- back button hidden globally via CSS -->
     <h2>Blocked Throat</h2>
     <div class="meta">2024</div>
+
+    <!-- Carousel (top) — styles come from styles.css -->
+    <div class="carousel" role="region" aria-label="Project media">
+      <div class="viewport">
+        <div class="track" id="bt-track">
+          <!-- Images -->
+          <div class="slide"><img src="../images/radioLight.jpg" alt="Blocked Throat — image 1"></div>
+          <div class="slide"><img src="../images/blockedthroat.jpg" alt="Blocked Throat — image 2"></div>
+
+          <!-- Video (YouTube) as a slide -->
+          <div class="slide">
+            <iframe
+              id="bt-yt"
+              src="https://www.youtube.com/embed/wV6P4WP07Hs?rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+              title="Blocked Throat — microphone section"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button class="btn prev" id="bt-prev" aria-label="Previous media">‹</button>
+        <button class="btn next" id="bt-next" aria-label="Next media">›</button>
+      </div>
+
+      <div class="dots" id="bt-dots" aria-hidden="true"></div>
+    </div>
+
+    <!-- Text (centered container; text left) -->
     <div class="body">
-  <!-- START: Project text (prefilled) -->
-  <p>Blocked Throat, and Surveillance Time—installations that construct expectations only to  subvert them. These works, and the research  that frames them, use failure as a method:  friction, delay, and misalignment become  strategies to reveal the invisible mechanics  behind everyday interactions.     The document examines how frameworks— both physical and digital—govern per ception and participation. It asks: Who is  watching whom? Who controls the frame? And what if that control slips?     Writing and making evolved together  throughout this project. The chatbot, embedded in the document, performs the very  questions the research asks: it forgets, glitches, and reframes, turning the act of reading  into an embodied experience of mediation.     This work reflects my broader practice: constructing systems that seem intuitive, only to  twist. The document doesn’t deliver a fixed  conclusion—it offers an ongoing encounter  with instability as research. if interested: https://pressanykeytocontinue.up.railway.app  Final research  documentDate: 2025   Format: Interactive website + written research   Materials: HTML/CSS/JS/python, AI chatbot, webcam integration, experimental interface 3. Several</p>
-  <!-- END: Project text -->
-</div>
-    <div class="gallery">
-  <!-- START: Gallery images (replace filenames) -->
-  <img src="../images/blocked-throat_01.jpg" alt="Blocked Throat — image 1">
-  <img src="../images/blocked-throat_02.jpg" alt="Blocked Throat — image 2">
-  <!-- END: Gallery images -->
-</div>
+      <!-- exact text you provided -->
+      <p>Blocked Throat is an installation that stages
+a breakdown. It begins with calm familiarity—
+a meditative display of radio
+wave-generated light patterns invites
+passive observation. After a few minutes,
+viewers are asked to give feedback. A microphone
+is placed prominently, offering
+a clear next step: speak. But when they
+do, their voice is captured and returned to
+them as fragmented, distorted noise.
+The work draws on principles from product
+design, where good systems guide users
+seamlessly from perception to action.
+I mimic this logic to build trust—only to
+rupture it. The microphone, an object that
+normally promises agency and clarity, becomes
+a site of failure. It doesn’t silence; it
+interrupts, rendering communication difficult,
+even absurd.
+This moment—the “And Then”—is the core
+of the piece. Viewers realize the system
+they trusted is unreliable. The breakdown
+is not a bug but the message. It forces
+participants to question not only what
+they’re experiencing, but how they expect
+systems to behave.
+Rather than providing answers, Blocked
+Throat creates friction. It critiques how predictability
+is engineered into our daily interactions—
+from digital platforms to public
+services—conditioning us to expect control
+and efficiency. Here, disruption becomes
+a tool to expose that conditioning, inviting
+a confrontation with the limits of expectation,
+agency, and the invisible contracts
+we enter when we interact with systems.</p>
+    </div>
   </article>
 </main>
+
 <footer class="site-footer"><p class="copy">&copy; <span id="year">2025</span> douwe teusink</p></footer>
+
+<!-- Lightbox markup (images only) -->
+<div class="lightbox" id="lb" aria-modal="true" role="dialog">
+  <img class="lightbox__img" id="lb-img" alt="">
+  <button class="lightbox__btn lightbox__prev" id="lb-prev" aria-label="Previous image">‹</button>
+  <button class="lightbox__btn lightbox__next" id="lb-next" aria-label="Next image">›</button>
+  <button class="lightbox__btn lightbox__close" id="lb-close" aria-label="Close">×</button>
+</div>
+
+<!-- Carousel + Lightbox + pause-YouTube script -->
+<script>
+(function(){
+  const track   = document.getElementById('bt-track');
+  const prevBtn = document.getElementById('bt-prev');
+  const nextBtn = document.getElementById('bt-next');
+  const slides  = Array.from(track.children);
+  const dotsBox = document.getElementById('bt-dots');
+  const ytFrame = document.getElementById('bt-yt');
+  const ytIndex = slides.findIndex(s => s.contains(ytFrame));
+  let index = 0;
+
+  // build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'dot' + (i === 0 ? ' is-active' : '');
+    d.addEventListener('click', () => { index = i; update(); });
+    dotsBox.appendChild(d);
+  });
+
+  function update(){
+    track.style.transform = `translateX(-${index * 100}%)`;
+    [...dotsBox.children].forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+    });
+    // pause YT when leaving the video slide
+    if (ytFrame && index !== ytIndex) {
+      ytFrame.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+    }
+  }
+
+  prevBtn.addEventListener('click', () => { index = (index - 1 + slides.length) % slides.length; update(); });
+  nextBtn.addEventListener('click', () => { index = (index + 1) % slides.length; update(); });
+
+  // keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  prevBtn.click();
+    if (e.key === 'ArrowRight') nextBtn.click();
+  });
+
+  // swipe
+  let startX = null;
+  track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+  track.addEventListener('touchend',   (e) => {
+    if (startX == null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) (dx < 0 ? nextBtn : prevBtn).click();
+    startX = null;
+  });
+
+  // ---------- Lightbox (images only) ----------
+  const lb      = document.getElementById('lb');
+  const lbImg   = document.getElementById('lb-img');
+  const lbPrev  = document.getElementById('lb-prev');
+  const lbNext  = document.getElementById('lb-next');
+  const lbClose = document.getElementById('lb-close');
+  let li = 0; // lightbox index within image-only list
+
+  // collect only image slides
+  const imgSlides = slides
+    .map((s, i) => ({ node: s.querySelector('img'), i }))
+    .filter(x => !!x.node);
+
+  function openLB(byImageIndex){
+    li = imgSlides.findIndex(x => x.i === byImageIndex);
+    if (li < 0) return;
+    lbImg.src = imgSlides[li].node.src;
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB(){
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+  function navLB(dir){
+    li = (li + dir + imgSlides.length) % imgSlides.length;
+    lbImg.src = imgSlides[li].node.src;
+  }
+
+  // click to open for images
+  slides.forEach((slide, i) => {
+    const img = slide.querySelector('img');
+    if (img) img.addEventListener('click', () => openLB(i));
+  });
+
+  lbPrev.addEventListener('click', () => navLB(-1));
+  lbNext.addEventListener('click', () => navLB(1));
+  lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB();
+  });
+
+  update();
+})();
+</script>
+
 <script src="../lines.js"></script>
-</body></html>
+</body>
+</html>

@@ -208,3 +208,35 @@ main, #app { padding-left: var(--frame); padding-right: var(--frame); }
 
 /* center the text block under carousels on all project pages */
 .project .body{ max-width:65ch; margin:0 auto 20px; text-align:left; }
+/* ===== About layout: text left, larger photo right ===== */
+
+.about{ max-width:1100px; margin-left:auto; margin-right:auto; }
+
+.about-grid{
+  display:grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  gap: clamp(18px, 4vw, 36px);
+  align-items:start;
+}
+
+/* readable line length for the copy */
+.about .copy{ max-width:65ch; }
+
+/* bigger portrait, right column */
+.about-photo{ 
+  justify-self:end; 
+  max-width: clamp(320px, 32vw, 520px);
+}
+.about-photo img{
+  width:100%; height:auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+
+/* stack on mobile */
+@media (max-width: 900px){
+  .about-grid{ grid-template-columns: 1fr; }
+  .about-photo{ justify-self:start; max-width: min(420px, 80vw); }
+}

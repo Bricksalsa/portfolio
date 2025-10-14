@@ -4,33 +4,56 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>douwe teusink — portfolio</title>
-  <!-- Monospace family close to reference -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <header class="site-header">
-    <div class="hy-lines" id="hy-lines">
-      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
-      <div class="hy-line" data-left="" data-center="douwe teusink" data-right=""></div>
-      <div class="hy-line" data-left="" data-center="portfolio" data-right="" data-accent="true"></div>
-      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
-    </div>
-  </header>
+  <div class="hy-lines" id="hy-lines">
+    <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+    <div class="hy-line" data-left="" data-center="douwe teusink" data-right=""></div>
+    <div class="hy-line" data-left="" data-center="portfolio" data-right="" data-accent="true"></div>
+    <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+  </div>
+</header>
 
 <nav class="top-nav">
   <a href="index.html" class="nav-link">work</a>
   <a href="about.html" class="nav-link">about</a>
-  <a href="mailto:douweteusink@gmail.com" class="nav-link">contact</a>
+  <a href="mailto:douweteusink@hotmail.com" class="nav-link">contact</a>
 </nav>
 
 <main>
-  \1\2<div class="about-photo-wrap"><img src="images/about.jpg" alt="portrait" style="max-width:280px;width:100%;border:1px solid #eaeaea;border-radius:8px;object-fit:cover;aspect-ratio:3/4;margin:0 0 16px 0;"></div><h2>about</h2>
-      <p>douwe teusink builds systems that misbehave — interactive installations where spectatorship, framing, and control are staged and then gently sabotaged. with a background in industrial design and a master in expanded scenography, he combines electronics, code, and scenographic setups to turn looking into an event.</p>
-      <p>recent works include <em>thanks for watching</em>, <em>biecht</em>, and the peepshow series — coin‑ or tap‑activated devices that flip the gaze back to the viewer using cameras and ai‑generated text.</p>
-    
+  <article class="about">
+    <h2>about</h2>
+
+    <div class="about-grid">
+      <!-- Left column: text -->
+      <div class="copy">
+        <p>I make systems that misbehave.</p>
+
+        <p>My work constructs interactions that appear intuitive, only to unravel. Rooted in scenography and shaped by a background in industrial design, I treat space, interfaces, and objects as scripts: they invite trust, suggest logic, and offer a sense of control. But that control is always fragile, and its collapse is where the work begins.</p>
+
+        <p>At the core of my practice is a fascination with spectatorship, mediation, and the illusion of agency. I am drawn to the moment when the frame becomes visible: when a familiar system glitches, a gaze is returned, or a structure turns on its user. These ruptures reveal the hidden dynamics that shape how we see, how we are seen, and how perception is structured.</p>
+
+        <p>My installations and digital works often pose as something recognizable: a confessional, a vending machine, a surveillance feed. Participants enter expecting clarity or transaction. But the setup twists. What was meant to guide begins to obstruct. What felt private becomes exposed. A coin is inserted, and the system looks back. Meaning emerges not from resolution, but from disorientation.</p>
+
+        <p>This is not about spectacle, but about framing failure. I design for friction. I build systems that can break, and in doing so, expose the control mechanisms embedded within them. I want the viewer to feel implicated: to realize their presence is part of the apparatus, and that the act of looking is never passive, never neutral.</p>
+
+        <p>Ultimately, my work asks: What happens when you think you’re in control, and then you’re not?</p>
+      </div>
+
+      <!-- Right column: larger portrait -->
+      <div class="about-photo">
+        <img src="images/portrait.jpg" alt="Portrait of Douwe Teusink">
+      </div>
+    </div>
   </article>
 </main>
-<footer class="site-footer"><p class="copy">&copy; <span id="year">2025</span> douwe teusink</p></footer>
+
+<footer class="site-footer">
+  <p class="copy">&copy; <span id="year">2025</span> douwe teusink</p>
+</footer>
 <script src="lines.js"></script>
-</body></html>
+</body>
+</html>
