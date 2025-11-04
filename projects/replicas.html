@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>douwe teusink — portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css" />
+
+  <!-- Lightbox styles (local to this page) -->
+  <style>
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.85);
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__img {
+      max-width: 94vw; max-height: 92vh;
+      object-fit: contain; background:#fff;
+      border:1px solid var(--line); border-radius:10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
+    }
+    .lightbox__btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      border: 1px solid #e5e5e5; background: #ffffffcc; backdrop-filter: blur(2px);
+      width: 40px; height: 40px; border-radius: 999px; cursor: pointer;
+      display: grid; place-items: center; font-family: var(--mono); font-size: 18px;
+    }
+    .lightbox__btn:hover { background:#fff; }
+    .lightbox__prev { left: 22px; }
+    .lightbox__next { right: 22px; }
+    .lightbox__close {
+      top: 18px; right: 18px; transform:none;
+      width: 34px; height: 34px; border-radius:999px;
+    }
+    @media (max-width: 560px){
+      .lightbox__btn{ width: 36px; height: 36px; }
+      .lightbox__prev{ left: 12px; } .lightbox__next{ right: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="hy-lines" id="hy-lines">
+      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+      <div class="hy-line" data-left="" data-center="douwe teusink" data-right=""></div>
+      <div class="hy-line" data-left="" data-center="portfolio" data-right="" data-accent="true"></div>
+      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+    </div>
+  </header>
+
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-link">work</a>
+    <a href="../about.html" class="nav-link">about</a>
+    <a href="mailto:douweteusink@hotmail.com" class="nav-link">contact</a>
+  </nav>
+
+  <main>
+    <article class="project">
+      <h2>Replica</h2>
+      <div class="meta">2025</div>
+
+      <div class="submeta">
+        <span class="label">materials</span> Painting, Metal, CRT, Camera, Replicate AI
+        <span class="dot"></span>
+        <span class="label">Exhibitions</span> Breek
+      </div>
+
+      <!-- Carousel (top) — styling comes from styles.css -->
+      <div class="carousel" role="region" aria-label="Project images">
+        <div class="viewport">
+          <div class="track" id="tfw-track">
+            <div class="slide"><img src="../images/replicas.JPG"   alt="replica — image 1"></div>
+            <div class="slide"><img src="../images/replicas1.JPG"   alt="replica — image 2"></div>
+          
+            <div class="slide"><img src="../images/replicas3.JPG"   alt="replica — image 3"></div>
+            <div class="slide"><img src="../images/replicas4.JPG"   alt="replica — image 4"></div>
+            <div class="slide"><img src="../images/replicas5.JPG"   alt="replica — image 5"></div>
+          </div>
+        </div>
+
+        <div class="nav">
+          <button class="btn prev" id="tfw-prev" aria-label="Previous image">‹</button>
+          <button class="btn next" id="tfw-next" aria-label="Next image">›</button>
+        </div>
+
+        <div class="dots" id="tfw-dots" aria-hidden="true"></div>
+      </div>
+
+      <!-- Explanatory text underneath (centered container; text left) -->
+      <div class="body">
+       <p>A machine speaks to itself in an endless loop. An image is shown to an AI, reinterpreted, and generated again. The new version is then fed back into the system, starting the cycle over like a digital whispering game with no human audience. With each repetition, something changes. Details fade, edges blur, new forms appear. What began as a clear image slowly drifts into abstraction until the original is no longer traceable. </p>
+       <p>The process happens continuously and autonomously, without intervention or correction. It is a closed circuit, a system that sustains itself, learning nothing, forgetting everything. The work visualizes a slow collapse of meaning: how repetition and automation can transform information into noise. </p> 
+       <p>The installation refers to the dead internet theory, the idea that a large part of online activity is no longer created by humans but by bots and algorithms interacting with each other. What remains is a self-generating world of data, detached from intention or awareness. In this space, the viewer witnesses an echo of that process: a machine watching, interpreting, and remaking until all traces of origin are lost. </p>      
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copy">&copy; <span id="year">2025</span> douwe teusink</p>
+  </footer>
+
+  <!-- Lightbox markup -->
+  <div class="lightbox" id="lb" aria-modal="true" role="dialog">
+    <img class="lightbox__img" id="lb-img" alt="">
+    <button class="lightbox__btn lightbox__prev" id="lb-prev" aria-label="Previous image">‹</button>
+    <button class="lightbox__btn lightbox__next" id="lb-next" aria-label="Next image">›</button>
+    <button class="lightbox__btn lightbox__close" id="lb-close" aria-label="Close">×</button>
+  </div>
+
+  <!-- Carousel + Lightbox script (no deps) -->
+  <script>
+    (function(){
+      const track   = document.getElementById('tfw-track');
+      const prevBtn = document.getElementById('tfw-prev');
+      const nextBtn = document.getElementById('tfw-next');
+      const slides  = Array.from(track.children);
+      const dotsBox = document.getElementById('tfw-dots');
+      let index = 0;
+
+      // build dots
+      slides.forEach((_, i) => {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === 0 ? ' is-active' : '');
+        d.addEventListener('click', () => { index = i; update(); });
+        dotsBox.appendChild(d);
+      });
+
+      function update(){
+        track.style.transform = `translateX(-${index * 100}%)`;
+        [...dotsBox.children].forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === index);
+        });
+      }
+
+      prevBtn.addEventListener('click', () => { index = (index - 1 + slides.length) % slides.length; update(); });
+      nextBtn.addEventListener('click', () => { index = (index + 1) % slides.length; update(); });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  prevBtn.click();
+        if (e.key === 'ArrowRight') nextBtn.click();
+      });
+
+      // ---------- Lightbox ----------
+      const lb      = document.getElementById('lb');
+      const lbImg   = document.getElementById('lb-img');
+      const lbPrev  = document.getElementById('lb-prev');
+      const lbNext  = document.getElementById('lb-next');
+      const lbClose = document.getElementById('lb-close');
+      let li = 0; // lightbox index
+
+      function openLB(i){
+        li = i;
+        lbImg.src = slides[li].querySelector('img').src;
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLB(){
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+      function navLB(dir){
+        li = (li + dir + slides.length) % slides.length;
+        lbImg.src = slides[li].querySelector('img').src;
+      }
+
+      slides.forEach((slide, i) => {
+        slide.querySelector('img').addEventListener('click', () => openLB(i));
+      });
+
+      lbPrev.addEventListener('click', () => navLB(-1));
+      lbNext.addEventListener('click', () => navLB(1));
+      lbClose.addEventListener('click', closeLB);
+      lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB(); });
+
+      update();
+    })();
+  </script>
+
+  <script src="../lines.js"></script>
+</body>
+</html>
