@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>douwe teusink — portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css" />
+
+  <style>
+    /* ---- Lightbox ---- */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.85);
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__img {
+      max-width: 94vw; max-height: 92vh;
+      object-fit: contain; background: #fff;
+      border: 1px solid var(--line); border-radius: 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
+    }
+    .lightbox__btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      border: 1px solid #e5e5e5; background: #ffffffcc; backdrop-filter: blur(2px);
+      width: 40px; height: 40px; border-radius: 999px; cursor: pointer;
+      display: grid; place-items: center; font-family: var(--mono); font-size: 18px;
+    }
+    .lightbox__btn:hover { background: #fff; }
+    .lightbox__prev { left: 22px; }
+    .lightbox__next { right: 22px; }
+    .lightbox__close { top: 18px; right: 18px; transform: none; width: 34px; height: 34px; }
+    @media (max-width: 560px){
+      .lightbox__btn { width: 36px; height: 36px; }
+      .lightbox__prev { left: 12px; } .lightbox__next { right: 12px; }
+    }
+
+    /* ---- Tabs ---- */
+    .tab-bar {
+      display: flex;
+      max-width: 960px;
+      margin: 24px auto 0;
+      border-bottom: 1px solid var(--line);
+      gap: 0;
+    }
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      padding: 10px 8px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      letter-spacing: .02em;
+      transition: color .12s, border-color .12s;
+      text-align: center;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.is-active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+
+    /* ---- Tab panels ---- */
+    .tab-panel { display: none; }
+    .tab-panel.is-active { display: block; }
+
+    /* sub-meta inside panel */
+    .panel-meta {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      font-family: var(--mono);
+      margin: 10px 0 18px;
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="hy-lines" id="hy-lines">
+    <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+    <div class="hy-line" data-left="" data-center="douwe teusink" data-right=""></div>
+    <div class="hy-line" data-left="" data-center="portfolio" data-right="" data-accent="true"></div>
+    <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+  </div>
+</header>
+
+<nav class="top-nav">
+  <a href="../index.html" class="nav-link">work</a>
+  <a href="../about.html" class="nav-link">about</a>
+  <a href="mailto:douweteusink@hotmail.com" class="nav-link">contact</a>
+</nav>
+
+<main>
+  <article class="project">
+    <h2>Proto Space STRP</h2>
+    <div class="meta">2026</div>
+
+    <div class="submeta">
+      <span class="label">role</span> Co-designer — space concept, interactive installation, community events
+      <span class="dot"></span>
+      <span class="label">location</span> STRP, Eindhoven
+      <span class="dot"></span>
+      <span class="label">site</span>
+      <a href="https://strp.nl/projects/over-proto" target="_blank" rel="noopener noreferrer">strp.nl/projects/over-proto ↗</a>
+    </div>
+
+    <!-- ===== TAB BAR ===== -->
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn is-active" role="tab" aria-selected="true"  data-tab="space">Space</button>
+      <button class="tab-btn"           role="tab" aria-selected="false" data-tab="door">Door Observer</button>
+      <button class="tab-btn"           role="tab" aria-selected="false" data-tab="casting">Chandeliers</button>
+    </div>
+
+    <!-- ===== PANEL 1: Space ===== -->
+    <div class="tab-panel is-active" id="panel-space" role="tabpanel">
+      <div class="carousel" role="region" aria-label="Proto Space — overview">
+        <div class="viewport">
+          <div class="track" id="ps-track">
+            <div class="slide"><img src="../images/IMG_0005.jpg"  alt="Proto Space STRP — overview 1"></div>
+            <div class="slide"><img src="../images/IMG_0019.png"  alt="Proto Space STRP — overview 2"></div>
+            <div class="slide"><img src="../images/IMG_0098.jpg"  alt="Proto Space STRP — overview 3"></div>
+            <div class="slide"><img src="../images/IMG_0168.jpg"  alt="Proto Space STRP — overview 4"></div>
+            <div class="slide"><img src="../images/IMG_0344.jpg"  alt="Proto Space STRP — overview 5"></div>
+            <div class="slide"><img src="../images/IMG_0241.jpg"  alt="Proto Space STRP — space poster"></div>
+            <div class="slide"><img src="../images/IMG_0428.jpg"  alt="Proto Space STRP — space with machine in view"></div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn prev" id="ps-prev" aria-label="Previous image">‹</button>
+          <button class="btn next" id="ps-next" aria-label="Next image">›</button>
+        </div>
+        <div class="dots" id="ps-dots" aria-hidden="true"></div>
+      </div>
+
+      <div class="body">
+        <p>PROTO is STRP's community space in Eindhoven — a place that refuses to be finished. Together with artist Bart Hees and a small group of multidisciplinary makers, I was part of the co-creation team that designed the space from concept to opening.</p>
+        <p>My involvement ran across several layers: thinking through what kind of space PROTO should be, what needs it has to function as a living lab, how it should feel to inhabit. The result sits somewhere between studio, stage, meeting room, and bar — deliberately unresolved, shaped by whoever is inside it.</p>
+        <p>The space itself is an installation. Large sculptural foam forms, draped curtains, graffiti-painted mirrors, and hand-cast lighting objects build an environment that is clearly constructed but refuses to feel institutional. A prototype of a space, visibly still in progress.</p>
+      </div>
+    </div>
+
+    <!-- ===== PANEL 2: Chandeliers / Casting ===== -->
+    <div class="tab-panel" id="panel-casting" role="tabpanel">
+      <div class="panel-meta">Community event · sand casting · aluminium · hand-blown glass</div>
+
+      <div class="carousel" role="region" aria-label="Chandelier and casting images">
+        <div class="viewport">
+          <div class="track" id="cast-track">
+            <div class="slide"><img src="../images/strpevent6.jpeg" alt="Casting event — pouring aluminium into sand moulds"></div>
+            <div class="slide"><img src="../images/strpevent2.jpeg" alt="Casting event — participants pressing shapes into sand"></div>
+            <div class="slide"><img src="../images/strpevent4.jpeg" alt="Casting event — participant shaping sand mould"></div>
+            <div class="slide"><img src="../images/strpevent3.jpeg" alt="Casting event — glowing crucibles of molten aluminium"></div>
+            <div class="slide"><img src="../images/strpevent1.jpeg" alt="Casting event — pouring molten aluminium close-up"></div>
+            <div class="slide"><img src="../images/strpevent5.jpeg" alt="Casting event — freshly cast aluminium cooling in sand"></div>
+            <div class="slide"><img src="../images/strpevent7.jpg" alt="Casting event — freshly cast aluminium cooling in sand"></div>
+            <div class="slide"><img src="../images/IMG_0178.jpg" alt="Chandelier — glass and cast aluminium 1"></div>
+            <div class="slide"><img src="../images/IMG_0181.jpg" alt="Chandelier — glass and cast aluminium 2"></div>
+            <div class="slide"><img src="../images/IMG_0185.jpg" alt="Chandelier — glass and cast aluminium 3"></div>
+            <div class="slide"><img src="../images/IMG_0188.jpg" alt="Cast aluminium chandelier overhead"></div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn prev" id="cast-prev" aria-label="Previous image">‹</button>
+          <button class="btn next" id="cast-next" aria-label="Next image">›</button>
+        </div>
+        <div class="dots" id="cast-dots" aria-hidden="true"></div>
+      </div>
+
+      <div class="body">
+        <p>As part of PROTO's community programme we organised an aluminium casting workshop. Participants pressed shapes into sand, and then we poured molten aluminium into the moulds. these forms were combined with hand-blown glass objects they became the chandeliers now hanging in the space: a ceiling full of things made by the community that inhabits it.</p>
+      </div>
+    </div>
+
+    <!-- ===== PANEL 3: Door Observer ===== -->
+    <div class="tab-panel" id="panel-door" role="tabpanel">
+      <div class="panel-meta">Interactive installation · camera · AI · thermal printer · Raspberry Pi</div>
+
+      <div class="carousel" role="region" aria-label="Door Observer images">
+        <div class="viewport">
+          <div class="track" id="do-track">
+            <div class="slide"><img src="../images/IMG_0382.jpg" alt="Door Observer — machine on wall"></div>
+            <div class="slide"><img src="../images/IMG_0405.jpg" alt="Door Observer — machine detail with receipt"></div>
+            <div class="slide"><img src="../images/IMG_0399.jpg" alt="Door Observer — machine detail with receipt"></div>
+            <div class="slide"><img src="../images/IMG_0428.jpg" alt="Door Observer — machine detail with receipt"></div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn prev" id="do-prev" aria-label="Previous image">‹</button>
+          <button class="btn next" id="do-next" aria-label="Next image">›</button>
+        </div>
+        <div class="dots" id="do-dots" aria-hidden="true"></div>
+      </div>
+
+      <div class="body">
+        <p>Mounted near the entrance of PROTO, Door Observer watches who comes and goes. Every time someone passes through, the machine generates a short AI-written description of that person and prints it on a thermal receipt. The descriptions accumulate — an anonymous log of everyone who entered or left.</p>
+        <p>At the end of the day, pressing a button triggers something different: the machine reads its own archive and prints a speculative account of what might have happened inside the space that day. It doesn't know. It guesses, composes, invents — turning arrivals and departures into a kind of fiction.</p>
+        <p>The piece sits in the same lineage as <em>poeM</em> and <em>Biecht</em>: a system that watches and writes, that makes you aware of being observed without quite confronting you. Here the machine is embedded in the daily rhythm of the space. The receipt it prints is yours to take or leave.</p>
+      </div>
+    </div>
+
+  </article>
+</main>
+
+<footer class="site-footer"><p class="copy">&copy; <span id="year">2025</span> douwe teusink</p></footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lb" aria-modal="true" role="dialog">
+  <img class="lightbox__img" id="lb-img" alt="">
+  <button class="lightbox__btn lightbox__prev" id="lb-prev" aria-label="Previous image">‹</button>
+  <button class="lightbox__btn lightbox__next" id="lb-next" aria-label="Next image">›</button>
+  <button class="lightbox__btn lightbox__close" id="lb-close" aria-label="Close">×</button>
+</div>
+
+<script>
+(function(){
+  // --- Tabs ---
+  const tabBtns   = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected', 'false'); });
+      tabPanels.forEach(p => p.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('is-active');
+    });
+  });
+
+  // --- Generic carousel factory ---
+  function makeCarousel(trackId, prevId, nextId, dotsId) {
+    const track   = document.getElementById(trackId);
+    const prevBtn = document.getElementById(prevId);
+    const nextBtn = document.getElementById(nextId);
+    const dotsBox = document.getElementById(dotsId);
+    if (!track) return [];
+    const slides = Array.from(track.children);
+    let index = 0;
+
+    slides.forEach((_, i) => {
+      const d = document.createElement('span');
+      d.className = 'dot' + (i === 0 ? ' is-active' : '');
+      d.addEventListener('click', () => { index = i; update(); });
+      dotsBox.appendChild(d);
+    });
+
+    function update() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      [...dotsBox.children].forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+    }
+
+    prevBtn.addEventListener('click', () => { index = (index - 1 + slides.length) % slides.length; update(); });
+    nextBtn.addEventListener('click', () => { index = (index + 1) % slides.length; update(); });
+
+    let startX = null;
+    track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+    track.addEventListener('touchend',   (e) => {
+      if (startX == null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) (dx < 0 ? nextBtn : prevBtn).click();
+      startX = null;
+    });
+
+    update();
+    return slides;
+  }
+
+  const psSlides   = makeCarousel('ps-track',   'ps-prev',   'ps-next',   'ps-dots');
+  const castSlides = makeCarousel('cast-track', 'cast-prev', 'cast-next', 'cast-dots');
+  const doSlides   = makeCarousel('do-track',   'do-prev',   'do-next',   'do-dots');
+
+  // --- Lightbox: pool all images ---
+  const allImgs = [];
+  [psSlides, castSlides, doSlides].forEach(group => {
+    group.forEach(slide => {
+      const img = slide.querySelector('img');
+      if (img) allImgs.push(img);
+    });
+  });
+
+  const lb      = document.getElementById('lb');
+  const lbImg   = document.getElementById('lb-img');
+  const lbPrev  = document.getElementById('lb-prev');
+  const lbNext  = document.getElementById('lb-next');
+  const lbClose = document.getElementById('lb-close');
+  let li = 0;
+
+  function openLB(img) {
+    li = allImgs.indexOf(img);
+    lbImg.src = allImgs[li].src;
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB() { lb.classList.remove('is-open'); document.body.style.overflow = ''; }
+  function navLB(dir) { li = (li + dir + allImgs.length) % allImgs.length; lbImg.src = allImgs[li].src; }
+
+  allImgs.forEach(img => img.addEventListener('click', () => openLB(img)));
+  lbPrev.addEventListener('click',  () => navLB(-1));
+  lbNext.addEventListener('click',  () => navLB(1));
+  lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB();
+  });
+})();
+</script>
+
+<script src="../lines.js"></script>
+</body>
+</html>
