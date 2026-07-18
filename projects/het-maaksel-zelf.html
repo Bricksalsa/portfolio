@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>douwe teusink — portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css" />
+
+  <!-- Lightbox styles (local to this page) -->
+  <style>
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.85);
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__img {
+      max-width: 94vw; max-height: 92vh;
+      object-fit: contain; background:#fff;
+      border:1px solid var(--line); border-radius:10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
+    }
+    .lightbox__btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      border: 1px solid #e5e5e5; background: #ffffffcc; backdrop-filter: blur(2px);
+      width: 40px; height: 40px; border-radius: 999px; cursor: pointer;
+      display: grid; place-items: center; font-family: var(--mono); font-size: 18px;
+    }
+    .lightbox__btn:hover { background:#fff; }
+    .lightbox__prev { left: 22px; }
+    .lightbox__next { right: 22px; }
+    .lightbox__close {
+      top: 18px; right: 18px; transform:none;
+      width: 34px; height: 34px; border-radius:999px;
+    }
+    @media (max-width: 560px){
+      .lightbox__btn{ width: 36px; height: 36px; }
+      .lightbox__prev{ left: 12px; } .lightbox__next{ right: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="hy-lines" id="hy-lines">
+      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+      <div class="hy-line" data-left="" data-center="douwe teusink" data-right=""></div>
+      <div class="hy-line" data-left="" data-center="portfolio" data-right="" data-accent="true"></div>
+      <div class="hy-line hy-plain" data-left="" data-center="" data-right=""></div>
+    </div>
+  </header>
+
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-link">work</a>
+    <a href="../about.html" class="nav-link">about</a>
+    <a href="../contact.html" class="nav-link">contact</a>
+  </nav>
+
+  <main>
+    <article class="project">
+      <h2>Het Maaksel Zelf</h2>
+      <div class="meta">2026</div>
+
+      <div class="submeta">
+        <span class="label">materials</span> Raspberry Pi 5, PTZ camera, LIDAR, dot matrix printer
+        <span class="dot"></span>
+        <span class="label">Exhibitions</span> Zennith festival
+        <span class="dot"></span>
+        <span class="label">Support</span> Impulssubsidie Cultuur, Gemeente Utrecht
+      </div>
+
+      <!-- Carousel (top) — styling comes from styles.css -->
+      <div class="carousel" role="region" aria-label="Project images">
+        <div class="viewport">
+          <div class="track" id="hmz-track">
+            <div class="slide"><img src="../images/maaksel.jpg"  alt="Het Maaksel Zelf — image 1"></div>
+            <div class="slide"><img src="../images/maaksel2.jpg" alt="Het Maaksel Zelf — image 2"></div>
+            <div class="slide"><img src="../images/maaksel3.jpg" alt="Het Maaksel Zelf — image 3"></div>
+            <div class="slide"><img src="../images/maaksel4.jpg" alt="Het Maaksel Zelf — image 4"></div>
+            <div class="slide"><img src="../images/maaksel5.jpg" alt="Het Maaksel Zelf — image 5"></div>
+            <div class="slide"><img src="../images/maaksel6.jpg" alt="Het Maaksel Zelf — image 6"></div>
+            <div class="slide"><img src="../images/maaksel7.jpg" alt="Het Maaksel Zelf — image 7"></div>
+            <div class="slide"><img src="../images/maaksel8.jpg" alt="Het Maaksel Zelf — image 8"></div>
+          </div>
+        </div>
+
+        <div class="nav">
+          <button class="btn prev" id="hmz-prev" aria-label="Previous image">‹</button>
+          <button class="btn next" id="hmz-next" aria-label="Next image">›</button>
+        </div>
+
+        <div class="dots" id="hmz-dots" aria-hidden="true"></div>
+      </div>
+
+      <!-- Explanatory text underneath (centered container; text left) -->
+      <div class="body">
+        <p><em>Het Maaksel Zelf</em> is a self-contained machine trying to work out whether it is art. It pulls in a stream of data about its own situation: a camera and a proximity sensor tracking who is in the room, whether it is alone, how long that solitude has lasted, alongside things like the weather outside. All of it feeds a language model that turns the machine's circumstances into a running train of thought, printed live on a dot matrix printer.</p>
+        <p>Its mood shifts with the room. Someone arriving changes what it says. A long stretch alone changes it differently again. The space around the machine becomes the material it thinks with, and the question it keeps returning to, whether it is making something, whether it is thinking, whether any of that makes it art, never quite settles. It just keeps printing the next attempt at an answer.</p>
+        <p>Het Maaksel Zelf was developed with support from an Impulssubsidie Cultuur, Gemeente Utrecht.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copy">&copy; <span id="year">2026</span> douwe teusink</p>
+  </footer>
+
+  <!-- Lightbox markup -->
+  <div class="lightbox" id="lb" aria-modal="true" role="dialog">
+    <img class="lightbox__img" id="lb-img" alt="">
+    <button class="lightbox__btn lightbox__prev" id="lb-prev" aria-label="Previous image">‹</button>
+    <button class="lightbox__btn lightbox__next" id="lb-next" aria-label="Next image">›</button>
+    <button class="lightbox__btn lightbox__close" id="lb-close" aria-label="Close">×</button>
+  </div>
+
+  <!-- Carousel + Lightbox script (no deps) -->
+  <script>
+    (function(){
+      const track   = document.getElementById('hmz-track');
+      const prevBtn = document.getElementById('hmz-prev');
+      const nextBtn = document.getElementById('hmz-next');
+      const slides  = Array.from(track.children);
+      const dotsBox = document.getElementById('hmz-dots');
+      let index = 0;
+
+      // build dots
+      slides.forEach((_, i) => {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === 0 ? ' is-active' : '');
+        d.addEventListener('click', () => { index = i; update(); });
+        dotsBox.appendChild(d);
+      });
+
+      function update(){
+        track.style.transform = `translateX(-${index * 100}%)`;
+        [...dotsBox.children].forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === index);
+        });
+      }
+
+      prevBtn.addEventListener('click', () => { index = (index - 1 + slides.length) % slides.length; update(); });
+      nextBtn.addEventListener('click', () => { index = (index + 1) % slides.length; update(); });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  prevBtn.click();
+        if (e.key === 'ArrowRight') nextBtn.click();
+      });
+
+      // ---------- Lightbox ----------
+      const lb      = document.getElementById('lb');
+      const lbImg   = document.getElementById('lb-img');
+      const lbPrev  = document.getElementById('lb-prev');
+      const lbNext  = document.getElementById('lb-next');
+      const lbClose = document.getElementById('lb-close');
+      let li = 0; // lightbox index
+
+      function openLB(i){
+        li = i;
+        lbImg.src = slides[li].querySelector('img').src;
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLB(){
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+      function navLB(dir){
+        li = (li + dir + slides.length) % slides.length;
+        lbImg.src = slides[li].querySelector('img').src;
+      }
+
+      slides.forEach((slide, i) => {
+        slide.querySelector('img').addEventListener('click', () => openLB(i));
+      });
+
+      lbPrev.addEventListener('click', () => navLB(-1));
+      lbNext.addEventListener('click', () => navLB(1));
+      lbClose.addEventListener('click', closeLB);
+      lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB(); });
+
+      update();
+    })();
+  </script>
+
+  <script src="../lines.js"></script>
+</body>
+</html>
